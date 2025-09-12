@@ -77,10 +77,11 @@ export async function POST(req: NextRequest) {
       email: newUser.email,
     });
 
-    return NextResponse.json(
+    // 7. Build response
+    const response = NextResponse.json(
       {
         message: "Signup successful",
-        token,
+        token, // keep in JSON for client usage
         user: {
           id: newUser._id,
           name: newUser.name,
@@ -91,6 +92,17 @@ export async function POST(req: NextRequest) {
       },
       { status: 201 }
     );
+
+    // 8. Attach HttpOnly cookie
+    response.cookies.set("authToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+
+    return response;
   } catch (error) {
     console.error("Signup error:", error);
     return NextResponse.json(

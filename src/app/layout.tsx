@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Whisper clothing",
@@ -15,9 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className="antialiased">
         <Toaster position="bottom-left" />
-        <CartProvider>{children}</CartProvider>
+        <AuthProvider>
+          <CartProvider>{children}</CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

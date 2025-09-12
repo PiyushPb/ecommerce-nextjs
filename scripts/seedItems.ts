@@ -8,15 +8,16 @@ async function seedItems() {
 
   const items = [
     {
-      title: "Classic White T-Shirt",
+      title: "Classic Red T-Shirt",
       description: "Comfortable cotton t-shirt, perfect for everyday wear.",
       category: "T-shirt",
       images: {
-        thumbnail: "https://picsum.photos/seed/tshirt1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/young-boy-with-curly-hairs-makes-thumb-up-sign_114579-17329.jpg?",
         gallery: [
-          "https://picsum.photos/seed/tshirt1/400/400",
-          "https://picsum.photos/seed/tshirt2/400/400",
-          "https://picsum.photos/seed/tshirt3/400/400",
+          "https://img.freepik.com/free-photo/young-boy-with-curly-hairs-makes-thumb-up-sign_114579-17329.jpg?",
+          "https://img.freepik.com/free-photo/young-boy-with-curly-hairs-makes-agressive-face_114579-17375.jpg",
+          "https://img.freepik.com/free-photo/young-boy-with-curly-hairs-casting_114579-17327.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -28,14 +29,15 @@ async function seedItems() {
       description: "Slim fit denim jeans with stretch fabric.",
       category: "Jeans",
       images: {
-        thumbnail: "https://picsum.photos/seed/jeans1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/full-shot-smiley-woman-posing-outdoors_23-2150361019.jpg",
         gallery: [
-          "https://picsum.photos/seed/jeans1/400/400",
-          "https://picsum.photos/seed/jeans2/400/400",
-          "https://picsum.photos/seed/jeans3/400/400",
+          "https://img.freepik.com/free-photo/full-shot-smiley-woman-posing-outdoors_23-2150361019.jpg",
+          "https://img.freepik.com/free-photo/full-shot-smiley-woman-posing-outdoors_23-2150360988.jpg",
+          "https://img.freepik.com/free-photo/beautiful-woman-jeans_171337-11956.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["M", "L", "XL", "XXL", "XXXL"],
       price: 1499,
       quantity: 30,
     },
@@ -44,11 +46,12 @@ async function seedItems() {
       description: "Premium black leather jacket for a stylish look.",
       category: "Jackets",
       images: {
-        thumbnail: "https://picsum.photos/seed/jacket1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/annoyed-attractive-male-gestures-with-irritation-keeping-palms-opened-dressed-black-leather-jacket-jeans-frowns-face-bacause-miscommunication-negative-human-emotions-reaction_176420-13379.jpg",
         gallery: [
-          "https://picsum.photos/seed/jacket1/400/400",
-          "https://picsum.photos/seed/jacket2/400/400",
-          "https://picsum.photos/seed/jacket3/400/400",
+          "https://img.freepik.com/free-photo/annoyed-attractive-male-gestures-with-irritation-keeping-palms-opened-dressed-black-leather-jacket-jeans-frowns-face-bacause-miscommunication-negative-human-emotions-reaction_176420-13379.jpg",
+          "https://img.freepik.com/free-photo/suspicious-pensive-young-caucasian-male-black-leather-jacket-touching-face-while-thinking-something-trying-come-up-with-solution-having-perplexed-puzzled-expression-face-expression_176420-13388.jpg",
+          "https://img.freepik.com/free-photo/handsome-positive-man-black-leather-jacket-with-faint-smile-listens-music-earphones-young-caucasian-male-enjoys-pleasant-melodies-wearing-white-earphones-looking-with-blue-eyes_176420-13385.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -60,13 +63,15 @@ async function seedItems() {
       description: "Warm fleece hoodie for casual wear.",
       category: "Hoodies",
       images: {
-        thumbnail: "https://picsum.photos/seed/hoodie1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/medium-shot-woman-wearing-hoodie_23-2149359805.jpg",
         gallery: [
-          "https://picsum.photos/seed/hoodie1/400/400",
-          "https://picsum.photos/seed/hoodie2/400/400",
+          "https://img.freepik.com/free-photo/young-lady-oversized-hoodie-pants-pointing-aside-while-shouting-something-with-hand-looking-puzzled-front-view_176474-58490.jpg",
+          "https://img.freepik.com/free-photo/medium-shot-woman-wearing-hoodie_23-2149359805.jpg",
+          "https://img.freepik.com/free-photo/young-lady-showing-victory-sign-oversized-hoodie-pants-looking-confident-front-view_176474-58566.jpg?t=st=1757681422~exp=1757685022~hmac=094909c62c3c235a87700bcc96ec37b893b54302d35c6098730d3130bc333918&w=740",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["S", "M", "L", "XL", "XXXL"],
       price: 1099,
       quantity: 40,
     },

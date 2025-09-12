@@ -36,7 +36,7 @@ const ProductPage = () => {
       if (!productId) return;
 
       try {
-        const res = await fetch(`http://localhost:3000/api/items/${productId}`);
+        const res = await fetch(`/api/items/${productId}`);
         const data = await res.json();
         if (data.status === "success" && data.payload) {
           setProduct(data.payload);

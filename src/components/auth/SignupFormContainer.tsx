@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { BarLoader } from "react-spinners";
 import { Separator } from "@radix-ui/react-separator";
 import { SignupFormData } from "@/schemas/signup";
+import toast from "react-hot-toast";
+import { useAuth } from "@/context/AuthContext";
 
 function SignupFormContainer() {
   const [formData, setFormData] = useState<SignupFormData>({
@@ -27,6 +29,7 @@ function SignupFormContainer() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,15 +37,36 @@ function SignupFormContainer() {
     setLoading(true);
 
     try {
-      // TODO: Replace with actual signup API call
-      // await signupUser(formData);
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (data.errors) {
+          // Validation errors
+          toast.error(data.errors.map((err: any) => err.message).join(", "));
+        }
+        if (data.error) {
+          toast.error(data.error);
+        }
+        return;
+      }
+
+      // Save token + user in context
+      login(data.token, data.user);
 
       router.push("/"); // Redirect to home after successful signup
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
+        toast.error(err.message);
       } else {
         setError("Signup failed");
+        toast.error("Signup failed");
       }
     } finally {
       setLoading(false);

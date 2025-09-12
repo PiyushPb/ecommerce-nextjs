@@ -36,7 +36,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
       });
       const data = await response.json();
@@ -54,7 +54,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
         body: JSON.stringify({ itemId, quantity, size }),
       });
@@ -84,7 +84,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         method: "DELETE", // you can make a dedicated DELETE route per item
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
         body: JSON.stringify({ itemId, size }),
       });
@@ -100,7 +100,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const res = await fetch("/api/cart", {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
       });
       if (!res.ok) throw new Error("Failed to clear cart");
@@ -127,7 +127,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         removeCartItem,
         clearCart,
         totalQuantity,
-        
       }}
     >
       {children}

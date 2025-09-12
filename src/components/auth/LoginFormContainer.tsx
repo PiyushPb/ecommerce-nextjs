@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BarLoader } from "react-spinners";
 import { LoginFormData } from "@/schemas/login";
+import toast from "react-hot-toast";
+import { useAuth } from "@/context/AuthContext";
 
 function LoginFormContainer() {
   const [formData, setFormData] = useState<LoginFormData>({
@@ -17,26 +19,47 @@ function LoginFormContainer() {
   const [formErrors, setFormErrors] = useState<
     Partial<Record<keyof LoginFormData, string>>
   >({});
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormErrors({});
-    setError(null);
     setLoading(true);
 
     try {
-      // await loginUser(formData);
-      router.push("/"); // redirect after login
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Login failed");
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // Handle validation errors
+        if (data.errors) {
+          const newErrors: any = {};
+          data.errors.forEach((err: { field: string; message: string }) => {
+            newErrors[err.field] = err.message;
+          });
+          setFormErrors(newErrors);
+        }
+        if (data.error) {
+          toast.error(data.error);
+        }
+        return;
       }
+
+      // Save to AuthContext
+      login(data.token, data.user);
+
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -51,7 +74,7 @@ function LoginFormContainer() {
           <Input
             type="text"
             placeholder="Email / Phone"
-            variant={"auth"}
+            variant="auth"
             required
             value={formData.identifier}
             onChange={(e) =>
@@ -70,7 +93,7 @@ function LoginFormContainer() {
           <Input
             type="password"
             placeholder="Password"
-            variant={"auth"}
+            variant="auth"
             required
             value={formData.password}
             onChange={(e) =>
@@ -96,11 +119,9 @@ function LoginFormContainer() {
         </Button>
       </form>
 
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-
       <p>
         Don&apos;t have an account?{" "}
-        <Link href={"/auth/signup"} className="underline">
+        <Link href="/auth/signup" className="underline">
           Sign up
         </Link>
       </p>
