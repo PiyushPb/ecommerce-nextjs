@@ -1,14 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
+import Product from "@/types/products";
+import Link from "next/link";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 
-function CartProductCard() {
+function CartProductCard({ item }: { item: Product }) {
   return (
-    <div className="flex flex-col md:flex-row gap-5  border-b-1 border-gray-200 py-10 nth-[1]:pt-0">
+    <Link
+      href={`/products/${item.itemId}`}
+      className="flex flex-col md:flex-row gap-5  border-b-1 border-gray-200 py-10 nth-[1]:pt-0"
+    >
       {/* Product Image */}
       <div className="w-full md:w-[300px] h-[300px] flex-shrink-0">
         <img
-          src="https://images.unsplash.com/photo-1700177421832-9815a92029be?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={item?.thumbnail}
           alt="Product Image"
           className="w-full h-full object-cover"
         />
@@ -19,12 +24,14 @@ function CartProductCard() {
         <div className="flex flex-col gap-3">
           {/* Product Title */}
           <h3 className="text-2xl md:text-3xl lg:text-4xl uppercase font-semibold">
-            Black T-Shirt & Trouser
+            {item.title}
           </h3>
 
           {/* Pricing */}
           <div className="flex flex-row gap-2 items-center">
-            <span className="text-lg md:text-xl font-medium">₹ 500</span>
+            <span className="text-lg md:text-xl font-medium">
+              ₹ {item.price}
+            </span>
             <span className="text-sm text-gray-500">(Regular price)</span>
           </div>
 
@@ -32,12 +39,12 @@ function CartProductCard() {
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-600">Size:</span>
-              <span className="bg-gray-200 px-3 py-1 text-sm">M</span>
+              <span className="bg-gray-200 px-3 py-1 text-sm">{item.size}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-600">Quantity:</span>
               <div className="flex items-center gap-2">
-                <span className="px-3">1</span>
+                <span className="px-3">{item.quantity}</span>
               </div>
             </div>
           </div>
@@ -50,7 +57,7 @@ function CartProductCard() {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

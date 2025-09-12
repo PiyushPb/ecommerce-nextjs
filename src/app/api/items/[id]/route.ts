@@ -10,7 +10,7 @@ export async function GET(
 ) {
   await dbConnect();
 
-  const { id } = params;
+  const { id } = await params;
 
   // Validate MongoDB ObjectId
   if (!mongoose.Types.ObjectId.isValid(id)) {

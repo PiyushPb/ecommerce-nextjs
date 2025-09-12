@@ -13,6 +13,7 @@ import {
 import { useParams, useRouter } from "next/navigation";
 import ProductPageSkeleton from "@/components/skeleton/ProductPageSkeleton";
 import Product from "@/types/products";
+import toast from "react-hot-toast";
 
 const ProductPage = () => {
   const router = useRouter();
@@ -68,6 +69,42 @@ const ProductPage = () => {
     });
   };
 
+  const handleAddToCart = async () => {
+    if (!product || !selectedSize) {
+      toast.error("Select a size before adding to cart");
+      return;
+    }
+
+    const body = {
+      itemId: product._id,
+      quantity,
+      size: selectedSize,
+    };
+
+    try {
+      const response = await fetch("/api/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(`Failed: ${data.error || response.statusText}`);
+        return;
+      }
+
+      toast.success("Product added to cart!");
+    } catch (error) {
+      console.error("❌ Error adding to cart:", error);
+      toast.error("Something went wrong while adding to cart.");
+    }
+  };
+
   if (error) return <NoProductFound onBack={handleBackPress} />;
   if (!product) return <ProductPageSkeleton />;
 
@@ -80,6 +117,7 @@ const ProductPage = () => {
         handleBackPress={handleBackPress}
         handleSizeSelect={handleSizeSelect}
         handleQuantityChange={handleQuantityChange}
+        handleAddToCart={handleAddToCart}
       />
       <ProductThumbnailSection images={product.images} />
       <div
@@ -122,6 +160,7 @@ const ProductDescriptionSection = ({
   handleBackPress,
   handleSizeSelect,
   handleQuantityChange,
+  handleAddToCart,
 }: {
   product: Product;
   selectedSize: string | null;
@@ -129,6 +168,7 @@ const ProductDescriptionSection = ({
   handleBackPress: () => void;
   handleSizeSelect: (size: string) => void;
   handleQuantityChange: (type: "inc" | "dec") => void;
+  handleAddToCart: () => void;
 }) => {
   return (
     <div className="w-full md:w-[30%] flex flex-col gap-5">
@@ -222,7 +262,9 @@ const ProductDescriptionSection = ({
       </div>
 
       <div className="flex flex-row gap-2">
-        <Button className="w-fit p-5">Add to Cart</Button>
+        <Button className="w-fit p-5" onClick={handleAddToCart}>
+          Add to Cart
+        </Button>
         <Button className="w-fit p-5" variant={"outline"}>
           Share
         </Button>
