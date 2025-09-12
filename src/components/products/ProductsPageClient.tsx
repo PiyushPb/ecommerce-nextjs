@@ -48,7 +48,9 @@ function ProductsPageClient() {
     <div className="p-5 md:p-10 flex flex-col md:flex-row gap-10 min-h-[100vh] relative">
       <FiltersSection />
       <div className="w-full h-full bg-white">
-        <h1 className="text-2xl font-bold mb-4">Products</h1>
+        <h1 className="text-2xl font-bold mb-4">
+          Products ({products.length})
+        </h1>
         {loading ? (
           <p>Loading...</p>
         ) : products.length === 0 ? (

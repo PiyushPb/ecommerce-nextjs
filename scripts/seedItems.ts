@@ -80,10 +80,12 @@ async function seedItems() {
       description: "Traditional Indian kurta made from soft cotton fabric.",
       category: "Kurta",
       images: {
-        thumbnail: "https://picsum.photos/seed/kurta1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/young-attractive-indian-woman-traditional-dress-woman-dancing-against-white-background_1157-48160.jpg",
         gallery: [
-          "https://picsum.photos/seed/kurta1/400/400",
-          "https://picsum.photos/seed/kurta2/400/400",
+          "https://img.freepik.com/free-photo/young-attractive-indian-woman-traditional-dress-woman-dancing-against-white-background_1157-48160.jpg",
+          "https://img.freepik.com/free-photo/young-attractive-indian-woman-traditional-dress-woman-dancing-against-white-background_1157-48168.jpg",
+          "https://img.freepik.com/free-photo/young-attractive-indian-woman-traditional-dress-woman-dancing-against-white-background_1157-48166.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -95,10 +97,12 @@ async function seedItems() {
       description: "Stylish checked shirt for casual outings.",
       category: "Shirts",
       images: {
-        thumbnail: "https://picsum.photos/seed/shirt1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/handsome-man-wearing-sunglasses-standing-grey-wall_171337-14983.jpg",
         gallery: [
-          "https://picsum.photos/seed/shirt1/400/400",
-          "https://picsum.photos/seed/shirt2/400/400",
+          "https://img.freepik.com/free-photo/handsome-man-wearing-sunglasses-standing-grey-wall_171337-14983.jpg",
+          "https://img.freepik.com/free-photo/cheerful-man-wearing-sunglasses_171337-14987.jpg",
+          "https://img.freepik.com/free-photo/handsome-man-wearing-sunglasses-standing-grey-wall_171337-14983.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -110,13 +114,14 @@ async function seedItems() {
       description: "Comfortable and breathable track pants for workouts.",
       category: "Bottomwear",
       images: {
-        thumbnail: "https://picsum.photos/seed/track1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/stock-photo-charming-young-girl-olive-hoodie-joggers-sitting-bench-with-cup-coffee-street_132075-9197.jpg",
         gallery: [
-          "https://picsum.photos/seed/track1/400/400",
-          "https://picsum.photos/seed/track2/400/400",
+          "https://img.freepik.com/free-photo/stock-photo-charming-young-girl-olive-hoodie-joggers-sitting-bench-with-cup-coffee-street_132075-9197.jpg",
+          "https://img.freepik.com/free-photo/full-length-photo-stylish-woman-trendy-sportswear-posing-street-with-building-background-female-fashion-city-lifestyle_132075-9171.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["S", "M", "L", "XL", "XXL"],
       price: 899,
       quantity: 20,
     },
@@ -125,13 +130,14 @@ async function seedItems() {
       description: "Perfect for office and formal occasions.",
       category: "Blazers",
       images: {
-        thumbnail: "https://picsum.photos/seed/blazer1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/portrait-confident-handsome-man_171337-16753.jpg",
         gallery: [
-          "https://picsum.photos/seed/blazer1/400/400",
-          "https://picsum.photos/seed/blazer2/400/400",
+          "https://img.freepik.com/free-photo/portrait-confident-handsome-man_171337-16753.jpg",
+          "https://img.freepik.com/free-photo/portrait-serious-successful-man-dressed-jacket_171337-16756.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["M", "L", "XL", "XXL", "XXXL"],
       price: 2499,
       quantity: 10,
     },
@@ -140,13 +146,14 @@ async function seedItems() {
       description: "Collared t-shirt with a sporty look.",
       category: "T-shirt",
       images: {
-        thumbnail: "https://picsum.photos/seed/polo1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/young-confused-man-black-shirt-with-optical-glasses-looks-side-isolated-pink-wall_141793-35279.jpg",
         gallery: [
-          "https://picsum.photos/seed/polo1/400/400",
-          "https://picsum.photos/seed/polo2/400/400",
+          "https://img.freepik.com/free-photo/young-pleased-man-black-shirt-with-optical-glasses-holds-coffee-takeaway-cup-puts-hand-waist-isolated-pink-wall_141793-35407.jpg0",
+          "https://img.freepik.com/free-photo/young-pleased-man-black-shirt-with-optical-glasses-pretends-hold-something-hand-puts-hand-waist-isolated-pink-wall_141793-35414.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["S", "M", "L", "XL", "XXXL"],
       price: 649,
       quantity: 45,
     },
@@ -155,13 +162,14 @@ async function seedItems() {
       description: "Lightweight sleeveless puffer jacket.",
       category: "Jackets",
       images: {
-        thumbnail: "https://picsum.photos/seed/jacket4/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102156.jpg",
         gallery: [
-          "https://picsum.photos/seed/jacket4/400/400",
-          "https://picsum.photos/seed/jacket5/400/400",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102021.jpg",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102018.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["M", "L", "XL", "XXL", "XXXL"],
       price: 1999,
       quantity: 18,
     },
@@ -170,10 +178,11 @@ async function seedItems() {
       description: "Slim-fit chinos for office or casual wear.",
       category: "Bottomwear",
       images: {
-        thumbnail: "https://picsum.photos/seed/chino1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102156.jpg",
         gallery: [
-          "https://picsum.photos/seed/chino1/400/400",
-          "https://picsum.photos/seed/chino2/400/400",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102021.jpg",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102018.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -185,13 +194,13 @@ async function seedItems() {
       description: "Soft, cozy sweatshirt with printed design.",
       category: "Hoodies",
       images: {
-        thumbnail: "https://picsum.photos/seed/sweatshirt1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/concentrated-young-man-sitting-isolated-grey_171337-10555.jpg",
         gallery: [
-          "https://picsum.photos/seed/sweatshirt1/400/400",
-          "https://picsum.photos/seed/sweatshirt2/400/400",
+          "https://img.freepik.com/free-photo/handsome-young-man-sitting-isolated-grey_171337-10550.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["M", "L", "XL", "XXL", "XXXL"],
       price: 899,
       quantity: 28,
     },
@@ -200,10 +209,11 @@ async function seedItems() {
       description: "Traditional Nehru jacket for festive occasions.",
       category: "Ethnic",
       images: {
-        thumbnail: "https://picsum.photos/seed/nehru1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/close-up-hands-holding-embroidered-shirt_23-2149318814.jpg",
         gallery: [
-          "https://picsum.photos/seed/nehru1/400/400",
-          "https://picsum.photos/seed/nehru2/400/400",
+          "https://img.freepik.com/free-photo/medium-shot-people-wearing-ukranian-shirts_23-2149318758.jpg",
+          "https://img.freepik.com/free-photo/medium-shot-smiley-man-wearing-ukranian-shirt_23-2149318757.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -215,10 +225,12 @@ async function seedItems() {
       description: "Breathable cotton shorts for summer.",
       category: "Bottomwear",
       images: {
-        thumbnail: "https://picsum.photos/seed/shorts1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/yellow-background-woman-with-headphones_23-2148286119.jpg",
         gallery: [
-          "https://picsum.photos/seed/shorts1/400/400",
-          "https://picsum.photos/seed/shorts2/400/400",
+          "https://img.freepik.com/free-photo/yellow-background-woman-with-headphones_23-2148286119.jpg",
+          "https://img.freepik.com/free-photo/woman-with-short-pants-looking-away_23-2148286154.jpg",
+          "https://img.freepik.com/free-photo/woman-with-floral-shirt-sitting-stairs-looking-camera_23-2148286123.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -230,13 +242,14 @@ async function seedItems() {
       description: "Trendy graphic t-shirt for casual wear.",
       category: "T-shirt",
       images: {
-        thumbnail: "https://picsum.photos/seed/printtee1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/portrait-young-latin-man-wearing-summer-clothes-listening-music-with-earphones-against-yellow_58466-11451.jpg",
         gallery: [
-          "https://picsum.photos/seed/printtee1/400/400",
-          "https://picsum.photos/seed/printtee2/400/400",
+          "https://img.freepik.com/free-photo/portrait-young-latin-man-wearing-summer-clothes-listening-music-with-earphones-against-yellow_58466-11451.jpg",
+          "https://img.freepik.com/free-photo/portrait-young-latin-man-wearing-summer-clothes-listening-music-with-earphones-against-yellow_58466-11451.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["M", "L", "XL", "XXL", "XXXL"],
       price: 549,
       quantity: 50,
     },
@@ -245,10 +258,11 @@ async function seedItems() {
       description: "Keep warm with this soft woolen pullover.",
       category: "Winterwear",
       images: {
-        thumbnail: "https://picsum.photos/seed/pullover1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/i-bought-it-sale-emotive-carefree-woman-stylish-outfit-looking-happy-pleased-while-posing-smiling-stretching-sweater-standing-i-received-good-feedback_176420-13752.jpg",
         gallery: [
-          "https://picsum.photos/seed/pullover1/400/400",
-          "https://picsum.photos/seed/pullover2/400/400",
+          "https://img.freepik.com/free-photo/attractive-girl-looking-fun-portrait-slender-caucasian-female-trendy-sweater-holding-hands-head-smiling-broadly-posing-camera-being-good-mood_176420-13719.jpg",
+          "https://img.freepik.com/free-photo/attractive-girl-looking-fun-portrait-slender-caucasian-female-trendy-sweater-holding-hands-head-smiling-broadly-posing-camera-being-good-mood_176420-13719.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -260,10 +274,11 @@ async function seedItems() {
       description: "Light and breathable linen shirt.",
       category: "Shirts",
       images: {
-        thumbnail: "https://picsum.photos/seed/linenshirt1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/portrait-handsome-bearded-man-outside_23-2150266914.jpg",
         gallery: [
-          "https://picsum.photos/seed/linenshirt1/400/400",
-          "https://picsum.photos/seed/linenshirt2/400/400",
+          "https://img.freepik.com/free-photo/portrait-handsome-bearded-man-outside_23-2150266914.jpg",
+          "https://img.freepik.com/free-photo/portrait-brothers-outdoors-haircut-session_23-2150266908.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
@@ -275,13 +290,14 @@ async function seedItems() {
       description: "Trendy bomber jacket for winter.",
       category: "Jackets",
       images: {
-        thumbnail: "https://picsum.photos/seed/bomber1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/photo-woman-looking-away-black-leather-jacket-cap_114579-59398.jpg",
         gallery: [
-          "https://picsum.photos/seed/bomber1/400/400",
-          "https://picsum.photos/seed/bomber2/400/400",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102021.jpg",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102018.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
+      sizes: ["M", "L", "XL", "XXL", "XXXL"],
       price: 2899,
       quantity: 17,
     },
@@ -290,30 +306,32 @@ async function seedItems() {
       description: "Printed hoodie with adjustable hood.",
       category: "Hoodies",
       images: {
-        thumbnail: "https://picsum.photos/seed/graphichoodie1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/young-girl-sport-outfits-having-fun_114579-17727.jpg",
         gallery: [
-          "https://picsum.photos/seed/graphichoodie1/400/400",
-          "https://picsum.photos/seed/graphichoodie2/400/400",
+          "https://img.freepik.com/free-photo/young-girl-sport-outfits-castings-looks-fun_114579-17720.jpg",
         ],
       },
       sizes: ["M", "L", "XL"],
       price: 1199,
       quantity: 30,
     },
+
     {
-      title: "Joggers",
-      description: "Comfortable joggers for daily workouts or casual wear.",
-      category: "Bottomwear",
+      title: "Bomber Jacket T-Shirt",
+      description: "Trendy bomber jacket for winter.",
+      category: "T-shirt",
       images: {
-        thumbnail: "https://picsum.photos/seed/joggers1/300/300",
+        thumbnail:
+          "https://img.freepik.com/free-photo/photo-woman-looking-away-black-leather-jacket-cap_114579-59398.jpg",
         gallery: [
-          "https://picsum.photos/seed/joggers1/400/400",
-          "https://picsum.photos/seed/joggers2/400/400",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102021.jpg",
+          "https://img.freepik.com/free-photo/expressive-young-woman-posing_176474-102018.jpg",
         ],
       },
-      sizes: ["M", "L", "XL"],
-      price: 999,
-      quantity: 35,
+      sizes: ["M", "L", "XL", "XXL", "XXXL"],
+      price: 2899,
+      quantity: 17,
     },
   ];
 

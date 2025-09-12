@@ -42,12 +42,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     toast.success("Logged in successfully");
   };
 
-  const logout = () => {
+  const logout = async () => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("authToken");
     localStorage.removeItem("authUser");
+
+    // Call API to clear cookie on the server
+    await fetch("/api/auth/logout", { method: "POST" });
+
     toast.success("Logged out");
+    window.location.href = "/auth/signup";
   };
 
   return (

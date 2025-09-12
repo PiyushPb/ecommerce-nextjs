@@ -7,6 +7,7 @@ import { Autoplay } from "swiper/modules";
 import { Button } from "../ui/button";
 import { RxArrowLeft, RxArrowRight } from "react-icons/rx";
 import type { Swiper as SwiperType } from "swiper";
+import Link from "next/link";
 
 function HeroSection() {
   const swiperRef = useRef<SwiperType | null>(null);
@@ -27,7 +28,7 @@ function HeroSection() {
           swiperRef.current = swiper;
         }}
       >
-        {[1, 2, 3].map((_, index) => (
+        {[1, 2, 3].map((number, index) => (
           <SwiperSlide key={index} className="w-full h-full relative">
             <div className="relative w-full h-full">
               {/* Content Box */}
@@ -41,14 +42,16 @@ function HeroSection() {
                   Cumque veritatis repellat quaerat eveniet ipsum eligendi harum
                   sit fugiat dolore consectetur.
                 </p>
-                <Button className="mt-6 bg-white text-black rounded-full hover:bg-gray-200 cursor-pointer">
-                  Explore the product
-                </Button>
+                <Link href={"/products"}>
+                  <Button className="mt-6 bg-white text-black rounded-full hover:bg-gray-200 cursor-pointer">
+                    Explore the product
+                  </Button>
+                </Link>
               </div>
 
               {/* Background Image */}
               <img
-                src="/assets/image/hero1.jpg"
+                src={`/assets/image/hero${number}.jpg`}
                 alt="Hero Image"
                 className="w-full h-full object-cover object-right md:object-top"
               />

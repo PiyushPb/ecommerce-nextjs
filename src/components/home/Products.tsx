@@ -13,6 +13,10 @@ function Products() {
     try {
       const response = await fetch("/api/items/highlighted");
       const data = await response.json();
+
+      console.log(data.payload.topProducts);
+      console.log(data.payload.tshirts);
+
       setTopProducts(data.payload.topProducts);
       setTopTshirts(data.payload.tshirts);
     } catch (error) {
@@ -35,7 +39,7 @@ function Products() {
       <div>
         <h2 className="text-5xl calSans mt-10">Top T-shirts</h2>
         <div className="flex flex-row flex-wrap justify-between gap-5 mt-5 ">
-          {topProducts.map((product: Product) => (
+          {topTshirts.map((product: Product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>

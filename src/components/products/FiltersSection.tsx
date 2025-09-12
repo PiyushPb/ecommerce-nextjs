@@ -99,14 +99,14 @@ const FiltersContent = ({
       <div>
         <h3 className="text-md font-semibold mb-2">Price Range</h3>
         <Slider
-          defaultValue={priceRange}
+          defaultValue={[300, 1000]}
           max={5000}
           step={100}
           min={300}
           onValueChange={setPriceRange}
         />
         <div className="text-sm text-muted-foreground mt-2">
-          ${priceRange[0]} - ${priceRange[1]}
+          ₹{priceRange[0]} - ₹{priceRange[1]}
         </div>
       </div>
 
@@ -123,7 +123,7 @@ export const FiltersSection = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [priceRange, setPriceRange] = useState<number[]>([0, 100]);
+  const [priceRange, setPriceRange] = useState<number[]>([0, 1000]);
 
   useEffect(() => {
     const c = searchParams.get("c");
@@ -134,7 +134,7 @@ export const FiltersSection = () => {
     if (s) setSelectedSize(s);
     if (p) {
       const [min, max] = p.split("-").map(Number);
-      setPriceRange([min || 0, max || 100]);
+      setPriceRange([min || 0, max || 1000]);
     }
   }, [searchParams]);
 
