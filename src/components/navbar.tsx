@@ -11,25 +11,38 @@ function Navbar() {
     setMenuOpen(!menuOpen);
   };
 
+  // Category links
+  const navItems = [
+    { label: "T-Shirts", value: "T-shirt" },
+    { label: "Hoodies", value: "Hoodies" },
+    { label: "Jumpers", value: "Winterwear" },
+    { label: "Caps", value: "Accessories" },
+    { label: "Accessories", value: "Accessories" },
+  ];
+
   return (
     <nav className="w-full px-5 md:px-10 py-5 flex justify-between items-center bg-white sticky top-0 z-[9999]">
       {/* Logo */}
-      <div>
-        <h1 className="text-xl font-bold">Whisper</h1>
-      </div>
+      <Link href="/">
+        <h1 className="text-xl font-bold">Whisper Clothing</h1>
+      </Link>
 
       {/* Desktop Menu */}
       <ul className="hidden md:flex flex-row gap-6 text-gray-700">
-        <li className="hover:text-black cursor-pointer">T-Shirts</li>
-        <li className="hover:text-black cursor-pointer">Hoodies</li>
-        <li className="hover:text-black cursor-pointer">Jumpers</li>
-        <li className="hover:text-black cursor-pointer">Caps</li>
-        <li className="hover:text-black cursor-pointer">Accessories</li>
+        {navItems.map((item) => (
+          <li key={item.label} className="hover:text-black cursor-pointer">
+            <Link href={`/products?c=${encodeURIComponent(item.value)}`}>
+              {item.label}
+            </Link>
+          </li>
+        ))}
       </ul>
 
       {/* Right Icons */}
       <div className="flex items-center gap-5">
-        <FaRegUser size={20} className="cursor-pointer" />
+        <Link href="/account">
+          <FaRegUser size={20} className="cursor-pointer" />
+        </Link>
         <Link href="/cart" className="relative cursor-pointer">
           <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
             2
@@ -46,11 +59,16 @@ function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <ul className="absolute top-16 left-0 w-full bg-white flex flex-col items-center gap-5 py-5 shadow-md md:hidden z-50">
-          <li className="hover:text-black cursor-pointer">T-Shirts</li>
-          <li className="hover:text-black cursor-pointer">Hoodies</li>
-          <li className="hover:text-black cursor-pointer">Jumpers</li>
-          <li className="hover:text-black cursor-pointer">Caps</li>
-          <li className="hover:text-black cursor-pointer">Accessories</li>
+          {navItems.map((item) => (
+            <li key={item.label} className="hover:text-black cursor-pointer">
+              <Link
+                href={`/products?c=${encodeURIComponent(item.value)}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       )}
     </nav>

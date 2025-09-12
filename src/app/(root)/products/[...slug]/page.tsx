@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,22 +10,78 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import ProductPageSkeleton from "@/components/skeleton/ProductPageSkeleton";
+import Product from "@/types/products";
 
-const SIZES = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
-const UNAVAILABLE_SIZES = ["XS", "XXXL"];
-
-function ProductPage() {
+const ProductPage = () => {
   const router = useRouter();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [error, setError] = useState<boolean>(false);
+
+  const params = useParams();
+  const slugs = params?.slug as string[] | undefined;
+
+  // Get last part as the product ID
+  const productId = slugs?.[slugs.length - 1];
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!productId) return;
+
+      try {
+        const res = await fetch(`http://localhost:3000/api/items/${productId}`);
+        const data = await res.json();
+        if (data.status === "success" && data.payload) {
+          setProduct(data.payload);
+          setError(false);
+        } else {
+          setError(true); // Product not found
+          setProduct(null);
+        }
+      } catch (err) {
+        console.error("Error fetching product:", err);
+        setError(true);
+        setProduct(null);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
 
   const handleBackPress = () => {
     router.back();
   };
 
+  const handleSizeSelect = (size: string) => {
+    setSelectedSize(size);
+  };
+
+  const handleQuantityChange = (type: "inc" | "dec") => {
+    if (quantity > product?.quantity) return;
+    setQuantity((prev) => {
+      if (type === "dec" && prev > 1) return prev - 1;
+      if (type === "inc" && product && prev < product.quantity) return prev + 1;
+      return prev;
+    });
+  };
+
+  if (error) return <NoProductFound onBack={handleBackPress} />;
+  if (!product) return <ProductPageSkeleton />;
+
   return (
     <section className="p-5 md:p-10 flex flex-col-reverse md:flex-row gap-10 md:h-[90vh]">
-      <ProductDescriptionSection handleBackPress={handleBackPress} />
-      <ProductThumbnailSection />
+      <ProductDescriptionSection
+        product={product}
+        selectedSize={selectedSize}
+        quantity={quantity}
+        handleBackPress={handleBackPress}
+        handleSizeSelect={handleSizeSelect}
+        handleQuantityChange={handleQuantityChange}
+      />
+      <ProductThumbnailSection images={product.images} />
       <div
         className="flex-row items-center gap-2 cursor-pointer w-fit flex md:hidden"
         onClick={handleBackPress}
@@ -35,15 +91,45 @@ function ProductPage() {
       </div>
     </section>
   );
-}
+};
+
+const NoProductFound = ({ onBack }: { onBack: () => void }) => {
+  return (
+    <div className="flex flex-col items-center justify-center h-[80vh] text-center p-5 space-y-4">
+      <div className="flex items-center cursor-pointer mb-4" onClick={onBack}>
+        <IoIosArrowBack size={24} />
+        <span className="ml-2 text-lg font-semibold">Go Back</span>
+      </div>
+      <h1 className="text-4xl font-bold text-gray-700">Product Not Found</h1>
+      <p className="text-gray-500 max-w-md">
+        Sorry, we couldn’t find the product you’re looking for. It might have
+        been removed or the link is broken.
+      </p>
+      <button
+        onClick={onBack}
+        className="mt-6 px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      >
+        Go Back
+      </button>
+    </div>
+  );
+};
 
 const ProductDescriptionSection = ({
+  product,
+  selectedSize,
+  quantity,
   handleBackPress,
+  handleSizeSelect,
+  handleQuantityChange,
 }: {
+  product: Product;
+  selectedSize: string | null;
+  quantity: number;
   handleBackPress: () => void;
+  handleSizeSelect: (size: string) => void;
+  handleQuantityChange: (type: "inc" | "dec") => void;
 }) => {
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
-
   return (
     <div className="w-full md:w-[30%] flex flex-col gap-5">
       {/* Back button */}
@@ -57,11 +143,11 @@ const ProductDescriptionSection = ({
 
       {/* Product details */}
       <div className="flex flex-col gap-4">
-        <h2 className="text-3xl uppercase">Black T-Shirt & Trouser</h2>
+        <h2 className="text-3xl uppercase">{product.title}</h2>
 
         {/* Pricing */}
         <div className="flex flex-row gap-2 items-center">
-          <span className="text-2xl">₹ 500</span>
+          <span className="text-2xl">₹ {product.price}</span>
           <span className="text-sm text-gray-500">(Regular price)</span>
         </div>
 
@@ -69,8 +155,8 @@ const ProductDescriptionSection = ({
         <div className="flex flex-col gap-2">
           <span>Sizes:</span>
           <div className="flex flex-wrap gap-2">
-            {SIZES.map((size) => {
-              const isUnavailable = UNAVAILABLE_SIZES.includes(size);
+            {["XS", "S", "M", "L", "XL", "XXL", "XXXL"].map((size) => {
+              const isAvailable = product.sizes.includes(size);
               const isSelected = selectedSize === size;
 
               return (
@@ -78,12 +164,12 @@ const ProductDescriptionSection = ({
                   key={size}
                   variant={isSelected ? "default" : "outline"}
                   className={`px-4 py-2 text-sm ${
-                    isUnavailable
+                    !isAvailable
                       ? "line-through cursor-not-allowed opacity-50"
                       : ""
                   }`}
-                  disabled={isUnavailable}
-                  onClick={() => !isUnavailable && setSelectedSize(size)}
+                  disabled={!isAvailable}
+                  onClick={() => isAvailable && handleSizeSelect(size)}
                 >
                   {size}
                 </Button>
@@ -94,11 +180,26 @@ const ProductDescriptionSection = ({
 
         {/* Quantity */}
         <div className="flex flex-col gap-2">
+          <span>Available Quantity: {product.quantity}</span>
+        </div>
+
+        {/* Quantity */}
+        <div className="flex flex-col gap-2">
           <span>Quantity:</span>
           <div className="flex flex-row gap-2 items-center">
-            <Button variant="outline">-</Button>
-            <span>1</span>
-            <Button variant="outline">+</Button>
+            <Button
+              variant="outline"
+              onClick={() => handleQuantityChange("dec")}
+            >
+              -
+            </Button>
+            <span>{quantity}</span>
+            <Button
+              variant="outline"
+              onClick={() => handleQuantityChange("inc")}
+            >
+              +
+            </Button>
           </div>
         </div>
 
@@ -106,11 +207,7 @@ const ProductDescriptionSection = ({
         <Accordion type="single" collapsible className="w-full mt-4">
           <AccordionItem value="description">
             <AccordionTrigger>Product Description</AccordionTrigger>
-            <AccordionContent>
-              This black T-shirt and trouser set is made from premium cotton,
-              designed for everyday comfort and durability. Perfect for casual
-              wear or light workouts.
-            </AccordionContent>
+            <AccordionContent>{product.description}</AccordionContent>
           </AccordionItem>
 
           <AccordionItem value="returns">
@@ -134,27 +231,27 @@ const ProductDescriptionSection = ({
   );
 };
 
-const ProductThumbnailSection = () => {
+const ProductThumbnailSection = ({ images }: { images: Product["images"] }) => {
   return (
     <div className="w-full md:w-[70%] grid grid-cols-5 grid-rows-5 gap-5">
       <div className="col-span-3 row-span-5 w-full h-full">
         <img
-          src="https://images.unsplash.com/photo-1700177421832-9815a92029be?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
+          src={images.gallery[0] || images.thumbnail}
+          alt="main"
           className="w-full h-full object-cover"
         />
       </div>
       <div className="col-span-2 row-span-2 w-full h-full">
         <img
-          src="https://images.unsplash.com/photo-1700177421838-7030f56be9d7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
+          src={images.gallery[1] || images.thumbnail}
+          alt="alt 1"
           className="w-full h-full object-cover"
         />
       </div>
       <div className="col-span-2 row-span-3 w-full h-full">
         <img
-          src="https://images.unsplash.com/photo-1700177421807-98c9c2d7bdf4?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
+          src={images.gallery[2] || images.thumbnail}
+          alt="alt 2"
           className="w-full h-full object-cover object-top"
         />
       </div>

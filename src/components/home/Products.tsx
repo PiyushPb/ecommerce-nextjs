@@ -1,25 +1,43 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../ui/productCard";
 import { FiArrowUpRight } from "react-icons/fi";
 import Link from "next/link";
+import Product from "@/types/products";
 
 function Products() {
+  const [topProducts, setTopProducts] = useState([]);
+  const [topTshirts, setTopTshirts] = useState([]);
+
+  async function fetchProducts() {
+    try {
+      const response = await fetch("/api/items/highlighted");
+      const data = await response.json();
+      setTopProducts(data.payload.topProducts);
+      setTopTshirts(data.payload.tshirts);
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <div className="my-10 clear-start w-full">
       <h2 className="text-5xl calSans ">Top Products</h2>
       <div className="flex flex-row flex-wrap justify-between gap-5 mt-5 ">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {topProducts.map((product: Product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
       </div>
       <div>
         <h2 className="text-5xl calSans mt-10">Top T-shirts</h2>
         <div className="flex flex-row flex-wrap justify-between gap-5 mt-5 ">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {topProducts.map((product: Product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
         </div>
       </div>
       <div className="mt-10 w-full flex justify-center items-center">
