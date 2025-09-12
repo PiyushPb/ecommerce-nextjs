@@ -1,7 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || ("mongodb://localhost:27017/" as string);
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error("❌ Please define the MONGODB_URI in .env.local");
@@ -22,7 +21,7 @@ export default async function dbConnect(): Promise<Mongoose> {
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
-      dbName: "eCommerce_clothing",
+      dbName: "ecommerce_clothing",
       bufferCommands: false,
     });
   }

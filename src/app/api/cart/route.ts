@@ -5,6 +5,7 @@ import Cart from "@/models/Cart";
 import Item from "@/models/Item";
 import { authMiddleware, AuthPayload } from "@/lib/auth";
 import Product from "@/types/products";
+import { CartItem } from "@/types/cart";
 
 export async function GET(req: NextRequest) {
   await dbConnect();
@@ -27,8 +28,8 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  const formattedItems = cart.items.map((item) => {
-    const product = (item as any).itemId;
+  const formattedItems = cart.items.map((item: CartItem) => {
+    const product = (item as CartItem).itemId;
 
     return {
       itemId: product?._id ?? null,
@@ -114,20 +115,28 @@ export async function DELETE(req: NextRequest) {
   if ("status" in auth) return auth;
   const user = (await auth) as AuthPayload;
 
-  const cart = await Cart.findOne({ userId: user.id });
-
-  if (!cart) {
-    return NextResponse.json({
-      status: "success",
-      message: "Cart already empty",
-    });
+  const { itemId, size } = await req.json();
+  if (!itemId || !size) {
+    return NextResponse.json(
+      { error: "itemId and size are required" },
+      { status: 400 }
+    );
   }
 
-  cart.items = [];
+  const cart = await Cart.findOne({ userId: user.id });
+  if (!cart) {
+    return NextResponse.json({ error: "Cart not found" }, { status: 404 });
+  }
+
+  cart.items = cart.items.filter(
+    (item) => item.itemId.toString() !== itemId || item.size !== size
+  );
+
   await cart.save();
 
   return NextResponse.json({
     status: "success",
-    message: "Cart cleared",
+    message: "Item removed from cart",
+    payload: cart,
   });
 }

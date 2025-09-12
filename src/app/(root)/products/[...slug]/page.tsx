@@ -14,6 +14,7 @@ import { useParams, useRouter } from "next/navigation";
 import ProductPageSkeleton from "@/components/skeleton/ProductPageSkeleton";
 import Product from "@/types/products";
 import toast from "react-hot-toast";
+import { useCart } from "@/context/CartContext";
 
 const ProductPage = () => {
   const router = useRouter();
@@ -21,6 +22,8 @@ const ProductPage = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [error, setError] = useState<boolean>(false);
+
+  const { addToCart } = useCart();
 
   const params = useParams();
   const slugs = params?.slug as string[] | undefined;
@@ -75,29 +78,8 @@ const ProductPage = () => {
       return;
     }
 
-    const body = {
-      itemId: product._id,
-      quantity,
-      size: selectedSize,
-    };
-
     try {
-      const response = await fetch("/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(body),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        toast.error(`Failed: ${data.error || response.statusText}`);
-        return;
-      }
-
+      await addToCart(product._id, quantity, selectedSize);
       toast.success("Product added to cart!");
     } catch (error) {
       console.error("❌ Error adding to cart:", error);
