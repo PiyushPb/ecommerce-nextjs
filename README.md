@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👕 Whisper Clothing – E-Commerce Platform
 
-## Getting Started
+![Whisper Clothing Banner](https://whisper-ecommerce.vercel.app/_next/image?url=%2Flogo.png&w=256&q=75)  
+*(Demo hosted on Vercel: [whisper-ecommerce.vercel.app](https://whisper-ecommerce.vercel.app/))*
 
-First, run the development server:
+Whisper Clothing is a modern **full-stack e-commerce application** built with **Next.js App Router**, **MongoDB**, and **API Routing** in Next.js.  
+It provides a seamless shopping experience with authentication, cart management, product browsing, and secure checkout flow.
 
+---
+
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 14+ (App Router)](https://nextjs.org/docs/app)
+- **Frontend:** React, TailwindCSS, ShadCN UI
+- **Backend:** Next.js API Routes (serverless functions)
+- **Database:** MongoDB (Mongoose ODM)
+- **Authentication:** JWT with HttpOnly cookies + Context API
+- **Deployment:** [Vercel](https://vercel.com)
+
+---
+
+## ✨ Features
+
+- 🔐 **Authentication & Authorization** (Sign up, login, protected routes)
+- 🛍️ **Product Listing & Details** (categories, filters, images)
+- 🛒 **Shopping Cart** (add, update, remove items, persistent storage)
+- 📦 **Order Management** (user orders, admin product/order control – extendable)
+- 🎨 **Modern UI/UX** using TailwindCSS + ShadCN
+- 📱 **Responsive Design** optimized for all devices
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the repo
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/PiyushPb/ecommerce-nextjs.git
+cd ecommerce-nextjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Set up environment variables
+```env
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_jwt_key
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+Make sure MONGODB_URI points to a valid MongoDB cluster (Atlas or local).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Run the development server
+```bash
+npm run dev
+```
+App will be available at: http://localhost:3000
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Screenshots
+Home page
+<img width="1904" height="1080" alt="image" src="https://github.com/user-attachments/assets/96a6cb65-95aa-40e5-afbc-70c5a23db437" />
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Products Page
+<img width="1904" height="1080" alt="image" src="https://github.com/user-attachments/assets/f36abdff-6227-48a9-a791-5739c3d9f6c5" />
+<img width="379" height="822" alt="image" src="https://github.com/user-attachments/assets/cb0f5d7a-dc3c-41d1-80cc-0d74ab43fd02" />
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Product Page
+<img width="1906" height="1080" alt="image" src="https://github.com/user-attachments/assets/8747e4b9-c911-4c46-890e-ad3c6b5c430a" />
+<img width="377" height="820" alt="image" src="https://github.com/user-attachments/assets/a3ba3bb3-cce3-4075-8ce0-37883086ef06" />
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Cart Page (Empty cart)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/79f5a317-e951-42c3-9046-7dc9d86e0cf4" />
+<img width="380" height="821" alt="image" src="https://github.com/user-attachments/assets/955cbf63-8104-4a4c-b814-0d10f2bdd7d5" />
+
+Cart Page
+<img width="1906" height="1080" alt="image" src="https://github.com/user-attachments/assets/ee1fc9ec-f91f-475d-8dd8-2fd952cac6f4" />
+<img width="379" height="819" alt="image" src="https://github.com/user-attachments/assets/e5262d20-c9a6-4c0f-8a3a-5d9eb7a9c14b" />
+
+---
+
+## Deployment
+This project is deployed on Vercel
+To deploy your own version:
+1. Push your code to GitHub.
+2. Import the repo into Vercel.
+3. Set the environment variables (MONGODB_URI, JWT_SECRET).
+4. Deploy!
+
+---
+
+##🔑 Authentication Flow
+1. Users can sign up/login.
+2. JWT is issued on login and stored in an HttpOnly cookie.
+3. The frontend stores basic user info in Context + localStorage for quick access.
+4. Middleware checks authentication for protected routes.
+
+
+---
+
+## 🧑‍💻 Contributing
+
+Contributions are welcome! 🚀
+
+1. **Fork** the repo  
+2. **Create a feature branch**  
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. Commit changes
+   ```bash
+   git commit -m "Add amazing feature"
+   ```
+4. Push to branch
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. Open a Pull Request
+
+--- 
+## 📬 Contact
+
+- **Author:** [Piyush Pardeshi](https://github.com/PiyushPb)  
+- **Project Demo:** [whisper-ecommerce.vercel.app](https://whisper-ecommerce.vercel.app)  
+- **Repository:** [ecommerce-nextjs](https://github.com/PiyushPb/ecommerce-nextjs)
