@@ -1,6 +1,5 @@
 # 👕 Whisper Clothing – E-Commerce Platform
 
-![Whisper Clothing Banner](https://whisper-ecommerce.vercel.app/_next/image?url=%2Flogo.png&w=256&q=75)  
 *(Demo hosted on Vercel: [whisper-ecommerce.vercel.app](https://whisper-ecommerce.vercel.app/))*
 
 Whisper Clothing is a modern **full-stack e-commerce application** built with **Next.js App Router**, **MongoDB**, and **API Routing** in Next.js.  
